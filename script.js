@@ -85,7 +85,7 @@ function createLinker(name, gopage) {
 function createOrderLinker(name, nuumber) {
      let li = document.createElement('button');
     li.innerHTML = name;
-    li.style = "background-color: #4CAF50; /* Green */ border: 1px solid green; color: white; padding: 15px 32px; text-align: center; text-decoration: none; font-size: 16px; cursor: pointer; width: 150px; display: block; "
+    li.style = "background-color: #2c2f33; /* Green */ border: 1px solid gray; color: white; padding: 32px 120px; text-align: center; text-decoration: none; font-size: 16px; cursor: pointer; width: 150px; display: block; "
     li.onclick = function () {
         page = 1;
         currentOrder = nuumber;
