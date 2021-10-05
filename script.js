@@ -85,11 +85,13 @@ function createLinker(name, gopage) {
 function createOrderLinker(name, nuumber) {
      let li = document.createElement('button');
     li.innerHTML = name;
+    li.style = "background-color: #4CAF50; /* Green */ border: 1px solid green; color: white; padding: 15px 32px; text-align: center; text-decoration: none; font-size: 16px; cursor: pointer; width: 150px; display: block; "
     li.onclick = function () {
         page = 1;
         currentOrder = nuumber;
         redraw();
     }
+    
     return li;
 }
 // get the ul#menu
