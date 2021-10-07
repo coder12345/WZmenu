@@ -63,7 +63,7 @@ function addToOrder(item, type) {
 function createMenuItem(name, value, type) {
     let li = document.createElement('button');
     li.innerHTML = name;
-    li.style = "background-color: #2c2f33; border: 1px solid gray; color: white; padding: 32px 140px; text-align: center; text-decoration: none; font-size: 16px; width: 19.4%; ";
+    li.style = "background-color: #2c2f33; border: 1px solid gray; color: white; padding: 32px 140px; text-align: center; text-decoration: none; font-size: 16px; width: 8%; ";
     li.onclick = function () {
       addToOrder(value, type);
     }
