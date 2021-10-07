@@ -8,6 +8,7 @@ var page = 0;
 //6 entree
 //7 sides
 //8 viewer
+
 var workingcolor = null;
 var workingorder = null;
 var currentOrder = 1;
@@ -62,8 +63,41 @@ function addToOrder(item, type) {
 function createMenuItem(name, value, type) {
     let li = document.createElement('button');
     li.innerHTML = name;
+    li.style = "background-color: #2c2f33; border: 1px solid gray; color: white; padding: 32px 140px; text-align: center; text-decoration: none; font-size: 16px; width: 19.4%; ";
     li.onclick = function () {
       addToOrder(value, type);
+    }
+    return li;
+}
+function createDeleteButton(itemnum, length) {
+    let li = document.createElement('button');
+    li.innerHTML = "Delete";
+    li.style = "background-color: #ff0000; border: 1px #ff0000; color: white; padding: 10px 140px; text-align: center; text-decoration: none; font-size: 16px; width: 45%; display: block; "
+    li.onclick = function () {
+        workingorder.splice(itemnum, length+1);
+        workingcolor.splice(itemnum, length+1);
+        
+        viewOrder();
+         if (currentOrder == 1) {
+            ordercolor1 = workingcolor;
+            orderstring1 = workingorder;
+        }  if (currentOrder == 2) {
+            ordercolor2 = workingcolor;
+            orderstring2 = workingorder;
+        }  if (currentOrder == 3) {
+            ordercolor3 = workingcolor;
+            orderstring3 = workingorder;
+        }  if (currentOrder == 4) {
+            ordercolor4 = workingcolor;
+            orderstring4 = workingorder;
+        }  if (currentOrder == 5) {
+            ordercolor5 = workingcolor;
+            orderstring5 = workingorder;
+        }  if (currentOrder == 6) {
+            ordercolor6 = workingcolor;
+            orderstring6 = workingorder;
+        }  
+      
     }
     return li;
 }
@@ -81,6 +115,7 @@ function createOrderBack() {
 function createMenuBack() {
     let li = document.createElement('button');
     li.innerHTML = "Back";
+    li.style = "background-color: #2c2f33; border: 1px solid gray; color: white; padding: 32px 140px; text-align: center; text-decoration: none; font-size: 16px; width: 97%; display: block; "
     li.onclick = function () {
         page = 1;
         redraw();
@@ -151,29 +186,50 @@ function viewOrder()
             workingorder = orderstring6;
             workingcolor = ordercolor6;
         }
+        console.log(workingorder);
+        console.log(workingcolor);
         clearScreen();
+        let since1 = 0
         for (let i = 0; i < workingorder.length; i++) {
+            
           
                 let li = document.createTextNode(workingorder[i]);
                 let span = document.createElement("span");
                 
+                
                 console.log(li);
-                //li.innerHTML = workingorder[i];
+            
                 if (workingcolor[i] == 1) {
                     span.style =  "color: white; display: block; padding: 18px 80px; font-size: 16px; font-family: Sans-serif";
+                    
+                        if (i !=  0) {
+                        menu.appendChild(createDeleteButton(i-since1,since1));
+                        console.log(since1)
+                        console.log(i-since1-1)
+                        since1 = 0;
+                    }
                 }
                 if (workingcolor[i] == 2) {
                     span.style = "color: cyan; display: block; padding: 18px 100px; font-size: 16px; font-family: Sans-serif";
+                    since1++;
+                    console.log(since1);
                 }
                 if (workingcolor[i] == 3) {
                     span.style = "color: red; display: block; padding: 18px 100px; font-size: 16px; font-family: Sans-serif";
+                    since1++;
+                    console.log(since1);
                 }
-              span.appendChild(li);
+            span.appendChild(li);
              menu.appendChild(span);
             
             
         }
-        menu.appendChild(createOrderBack());
+        console.log(since1);
+        if (workingorder.length > 0) {
+            menu.appendChild(createDeleteButton(workingorder.length-since1-1, since1))
+        }
+         menu.appendChild(createMenuBack());
+       
     }
 // get the ul#menu
 const menu = document.querySelector('#screen');
