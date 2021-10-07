@@ -7,6 +7,7 @@ var page = 0;
 //5 quesa 
 //6 entree
 //7 sides
+//8 Mods
 //8 viewer
 
 var workingcolor = null;
@@ -26,7 +27,7 @@ var orderstring6 = [];
 var ordercolor6 = [];
 
 
-function addToOrder(item, type) {
+function addToOrder(item, type, side) {
     
     if  (currentOrder == 1) {
         orderstring1.push(item);
@@ -58,14 +59,29 @@ function addToOrder(item, type) {
         ordercolor6.push(type);
         console.log(orderstring6);
     }
+    if (side) {
+        page = 7;
+        redraw();
+    }
 }
 //Makes button for menu
-function createMenuItem(name, value, type) {
+function createMenuItem(name, value, type, side) {
     let li = document.createElement('button');
     li.innerHTML = name;
-    li.style = "background-color: #2c2f33; border: 1px solid gray; color: white; padding: 32px 140px; text-align: center; text-decoration: none; font-size: 16px; width: 8%; ";
+    li.style = "background-color: #2c2f33; border: 1px solid gray; color: white; padding: 32px 140px; text-align: center; text-decoration: none; font-size: 16px; width: 97%; display:  block; ";
     li.onclick = function () {
-      addToOrder(value, type);
+      addToOrder(value, type, side);
+    }
+    return li;
+}
+function createModSideItem(name, value, type) {
+    let li = document.createElement('button');
+    li.innerHTML = name;
+    li.style = "background-color: #2c2f33; border: 1px solid gray; color: white; padding: 32px 140px; text-align: center; text-decoration: none; font-size: 16px; width: 97%; display:  block; ";
+    li.onclick = function () {
+      addToOrder(value, type, false);
+      page = 8;
+      redraw();
     }
     return li;
 }
@@ -260,14 +276,43 @@ if (page == 1) {
 
         
     if (page == 2) {
-    menu.appendChild(createMenuItem('Lemonade',"Lemonade",1 ));
-        menu.appendChild(createMenuItem('Coke',"Coke",2));
-        menu.appendChild(createMenuItem('Diet Coke',"Diet Coke",3));
-        menu.appendChild(createMenuItem('Lemonade',"Lemonade",1));
-        menu.appendChild(createMenuItem('Lemonade',"Lemonade",1));
-        menu.appendChild(createMenuBack());
+    menu.appendChild(createMenuItem('Lemonade',"Lemonade",1,false));
+        menu.appendChild(createMenuItem('Coke',"Coke",1,false));
+        menu.appendChild(createMenuItem('Diet Coke',"Diet Coke",1,false));
+        
    
 }   
+     if (page == 4) {
+        menu.appendChild(createMenuItem('WZ Classic',"WZ Classic",1,true));
+        menu.appendChild(createMenuBack());
+        
+        
+   
+}   
+    
+    
+    
+    
+    
+    
+    
+    if (page == 7) {
+        menu.appendChild(createModSideItem('S Fries',"Straight Fries",2));
+        menu.appendChild(createModSideItem('W Fries',"Wedge Fries",2));
+        menu.appendChild(createModSideItem('Swt Pot',"Sweet Potato Fries",2));
+        menu.appendChild(createModSideItem('Tots',"Tater Tots",2));
+        menu.appendChild(createModSideItem('Mac',"Mac and Cheese",2));
+        menu.appendChild(createModSideItem('Veg Med',"Veggie Melody",2));
+        menu.appendChild(createModSideItem('Veg of Day',"Veg of Day",2));
+        menu.appendChild(createModSideItem('Slaw',"Coleslaw",2));
+        menu.appendChild(createModSideItem('KC',"Chips",2));
+        menu.appendChild(createModSideItem('Oranges',"Oranges",2));
+        menu.appendChild(createModSideItem('Smashed',"Smashed Potato",2));
+        menu.appendChild(createModSideItem('Csr sld',"Caesar Salad",2));
+        menu.appendChild(createModSideItem('House sld',"House Salad",2));
+        
+        
+    }
 
 
     
